@@ -1,0 +1,21 @@
+function(metadata_add_example target src)
+    add_executable(${target} ${src})
+    target_link_libraries(${target} PRIVATE metadata::metadata)
+    metadata_set_warnings(${target} PRIVATE)
+    metadata_enable_sanitizers(${target})
+endfunction()
+
+metadata_add_example(metadata_basic           basic.cpp)
+metadata_add_example(metadata_object_helpers  object_helpers.cpp)
+metadata_add_example(metadata_nested          nested.cpp)
+metadata_add_example(metadata_merge           merge.cpp)
+metadata_add_example(metadata_path_lookup     path_lookup.cpp)
+metadata_add_example(metadata_format_output   format_output.cpp)
+
+if(METADATA_WITH_NLOHMANN_JSON AND TARGET nlohmann_json::nlohmann_json)
+    metadata_add_example(metadata_json_integration json_integration.cpp)
+endif()
+
+if(METADATA_WITH_PARCEL AND TARGET parcel::parcel)
+    metadata_add_example(metadata_parcel_integration parcel_integration.cpp)
+endif()
