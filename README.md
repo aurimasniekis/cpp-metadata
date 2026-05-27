@@ -104,7 +104,7 @@ include(FetchContent)
 FetchContent_Declare(
     metadata
     URL      https://github.com/aurimasniekis/cpp-metadata/archive/refs/tags/v0.2.0.tar.gz
-    URL_HASH SHA256=PLACEHOLDER
+    URL_HASH SHA256=dabd8a872a67c96a45d07a50a4d69abc273b05ba318628cd46f76ef909561db1
     DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 FetchContent_MakeAvailable(metadata)
