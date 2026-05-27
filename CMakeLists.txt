@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 
 project(metadata
-    VERSION     0.1.0
+    VERSION     0.2.0
     DESCRIPTION "Modern C++23 header-only metadata container (JSON-like)"
     LANGUAGES   CXX
 )

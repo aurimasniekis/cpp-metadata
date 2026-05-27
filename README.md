@@ -103,8 +103,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(FetchContent)
 FetchContent_Declare(
     metadata
-    URL      https://github.com/aurimasniekis/cpp-metadata/archive/refs/tags/v0.1.0.tar.gz
-    URL_HASH SHA256=bd118b80001381c959c5a66db703957fef3029dd6f4a260b1418a8370f2db2f6
+    URL      https://github.com/aurimasniekis/cpp-metadata/archive/refs/tags/v0.2.0.tar.gz
+    URL_HASH SHA256=PLACEHOLDER
     DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 FetchContent_MakeAvailable(metadata)
@@ -131,7 +131,7 @@ target_link_libraries(my_app PRIVATE metadata::metadata)
 If the library was installed with `cmake --install <build>`:
 
 ```cmake
-find_package(metadata 0.1 REQUIRED)
+find_package(metadata 0.2 REQUIRED)
 target_link_libraries(my_app PRIVATE metadata::metadata)
 ```
 
