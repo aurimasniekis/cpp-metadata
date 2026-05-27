@@ -16,6 +16,8 @@
 /// will fail at the `#include` line below — match the `<md/json.hpp>`
 /// gating style.
 
+#include <commons/color.hpp>
+#include <commons/icons.hpp>
 #include <md/json.hpp>  // brings ADL to_json/from_json for md::Value/Object
 #include <md/object.hpp>
 #include <md/ostream.hpp>  // operator<< for to_string()
@@ -70,12 +72,12 @@ public:
     /// @brief Registry descriptor for `ValueCell`. Carries display metadata
     ///        (name, icon, color) used by introspection tooling.
     static parcel::cell_type_descriptor_t descriptor() {
-        static const auto d = std::make_shared<parcel::SimpleCellTypeDescriptor<ValueCell>>(
-            parcel::descriptor::MetaInfo{
+        static const auto d =
+            std::make_shared<parcel::SimpleCellTypeDescriptor<ValueCell>>(parcel::DisplayInfo{
                 .name = "md::Value",
                 .description = "Dynamic JSON-shaped value from the metadata library.",
-                .icon = "mdi:variable",
-                .color = "#673AB7",  // Material Deep Purple 500
+                .icon = comms::Icons::mdi::variable,
+                .color = comms::Colors::mui::deep_purple[500],
             });
         return d;
     }
@@ -122,12 +124,12 @@ public:
 
     /// @brief Registry descriptor for `ObjectCell`.
     static parcel::cell_type_descriptor_t descriptor() {
-        static const auto d = std::make_shared<parcel::SimpleCellTypeDescriptor<ObjectCell>>(
-            parcel::descriptor::MetaInfo{
+        static const auto d =
+            std::make_shared<parcel::SimpleCellTypeDescriptor<ObjectCell>>(parcel::DisplayInfo{
                 .name = "md::Object",
                 .description = "Unordered string-keyed map of md::Value (md::Object/Metadata).",
-                .icon = "mdi:code-braces",
-                .color = "#FFA000",  // Material Amber 700
+                .icon = comms::Icons::mdi::code_braces,
+                .color = comms::Colors::mui::amber[700],
             });
         return d;
     }
@@ -181,12 +183,12 @@ public:
 
     /// @brief Registry descriptor for `ArrayCell`.
     static parcel::cell_type_descriptor_t descriptor() {
-        static const auto d = std::make_shared<parcel::SimpleCellTypeDescriptor<ArrayCell>>(
-            parcel::descriptor::MetaInfo{
+        static const auto d =
+            std::make_shared<parcel::SimpleCellTypeDescriptor<ArrayCell>>(parcel::DisplayInfo{
                 .name = "md::Array",
                 .description = "Heterogeneous vector of md::Value (md::Array).",
-                .icon = "mdi:code-brackets",
-                .color = "#43A047",  // Material Green 600
+                .icon = comms::Icons::mdi::code_brackets,
+                .color = comms::Colors::mui::green[600],
             });
         return d;
     }

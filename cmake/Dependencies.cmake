@@ -15,14 +15,30 @@ if(METADATA_WITH_NLOHMANN_JSON)
 endif()
 
 if(METADATA_WITH_PARCEL)
+    # cpp-parcel v0.2.0 links commons::commons INTERFACE. It declares cpp-commons
+    # in its own cmake/Dependencies.cmake (via include(Dependencies)), but that
+    # include never runs in our build: metadata's cmake dir sits ahead of
+    # parcel's on CMAKE_MODULE_PATH, so parcel's include(Dependencies) resolves
+    # back to *this* file — already fired by include_guard(GLOBAL), hence a
+    # no-op. We therefore declare cpp-commons here (mirroring parcel's pin) so
+    # commons::commons exists before parcel's target_link_libraries runs.
+    FetchContent_Declare(
+        cpp-commons
+        URL      https://github.com/aurimasniekis/cpp-commons/archive/refs/tags/v0.1.3.tar.gz
+        URL_HASH SHA256=2f5615ac96a1a1dddda5424ed75c0d1a0142f115f215502562f479ef138fc30d
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+        FIND_PACKAGE_ARGS 0.1 NAMES commons
+    )
+    FetchContent_MakeAvailable(cpp-commons)
+
     set(PARCEL_BUILD_TESTS    OFF CACHE INTERNAL "")
     set(PARCEL_BUILD_EXAMPLES OFF CACHE INTERNAL "")
     set(PARCEL_INSTALL        OFF CACHE INTERNAL "")
     FetchContent_Declare(
         cpp-parcel
-        URL https://github.com/aurimasniekis/cpp-parcel/archive/refs/tags/v0.1.0.tar.gz
-        URL_HASH SHA256=d9d5550580c30cc30816448b986d1dcd8e0c267a8f98ad3b2d496d806d834020
-        FIND_PACKAGE_ARGS 0.1.0 NAMES parcel
+        URL https://github.com/aurimasniekis/cpp-parcel/archive/refs/tags/v0.2.0.tar.gz
+        URL_HASH SHA256=5040c50fcd0ad001be761a35166a89a1792be667fbc436747a5ddbc8a377fe6a
+        FIND_PACKAGE_ARGS 0.2.0 NAMES parcel
     )
     FetchContent_MakeAvailable(cpp-parcel)
 endif()

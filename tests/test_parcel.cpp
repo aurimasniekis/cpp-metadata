@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 
+#include <commons/color.hpp>
+#include <commons/icons.hpp>
 #include <md/metadata.hpp>
 
 #include <string_view>
@@ -81,18 +83,19 @@ TEST(Parcel, KindMismatchRejected) {
 }
 
 TEST(Parcel, DescriptorCarriesIconAndColor) {
-    const auto vd = ValueCell::descriptor()->meta();
+    const auto vd = ValueCell::descriptor()->display_info();
     EXPECT_TRUE(vd.icon.has_value());
     EXPECT_TRUE(vd.color.has_value());
-    EXPECT_EQ(*vd.icon, "mdi:variable");
+    EXPECT_EQ(*vd.icon, comms::Icons::mdi::variable);
+    EXPECT_EQ(*vd.color, comms::Colors::mui::deep_purple[500]);
 
-    const auto od = ObjectCell::descriptor()->meta();
-    EXPECT_EQ(*od.icon, "mdi:code-braces");
-    EXPECT_EQ(*od.color, "#FFA000");
+    const auto od = ObjectCell::descriptor()->display_info();
+    EXPECT_EQ(*od.icon, comms::Icons::mdi::code_braces);
+    EXPECT_EQ(*od.color, comms::Colors::mui::amber[700]);
 
-    const auto ad = ArrayCell::descriptor()->meta();
-    EXPECT_EQ(*ad.icon, "mdi:code-brackets");
-    EXPECT_EQ(*ad.color, "#43A047");
+    const auto ad = ArrayCell::descriptor()->display_info();
+    EXPECT_EQ(*ad.icon, comms::Icons::mdi::code_brackets);
+    EXPECT_EQ(*ad.color, comms::Colors::mui::green[600]);
 }
 
 TEST(Parcel, BraceInitPassthrough) {
